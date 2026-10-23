@@ -6,8 +6,8 @@ from picamera2 import Picamera2
 picam2 = Picamera2()
 
 config = picam2.create_video_configuration(
-    main={"size": (1024, 576), "format": "RGB888"},
-    controls={"FrameRate": 30}
+    main={"size": (640, 480), "format": "RGB888"},
+    controls={"FrameRate": 120}
 )
 
 picam2.configure(config)
@@ -33,8 +33,9 @@ while True:
     # Capture from Pi Camera Module
     frame = picam2.capture_array()
 
-    frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
-    frame = cv2.flip(frame, 1)
+    # color processing and frame settings
+    #frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+    frame = cv2.flip(frame, -1)
 
     display_frame = frame.copy()
 
